@@ -1,0 +1,24 @@
+<div>
+    {% url 'public:index' as index_url %}
+    <span>{% if request.path == index_url %}Tenso{% else %}<a href="{{index_url}}">Tenso</a>{% endif %}</span>
+    {% url 'public:blog' as premium_url %}
+    <span>{% if request.path == premium_url %}Blog{% else %}<a href="{{premium_url}}">Blog</a>{% endif %}</span>
+    {% url 'public:podcast' as support_url %}
+    <span>{% if request.path == support_url %}Podcast{% else %}<a href="{{support_url}}">Podcast</a>{% endif %}</span>
+    {% url 'public:about' as about_url %}
+    <span>{% if request.path == about_url %}About{% else %}<a href="{{about_url}}">About</a>{% endif %}</span>
+    {% url 'public:events' as download_url %}
+    <span>{% if request.path == download_url %}Events{% else %}<a href="{{download_url}}">Events</a>{% endif %}
+    </span>
+    <span style="float:right">
+        {% if user.is_authenticated %}
+        {% url 'accounts:profile' as profile_url %}
+        <span>Hi {% if request.path == profile_url %}{{ user.username }}{% else %}<a href="{{ profile_url }}">
+                {{user.username }}</a>{% endif %}!</span>
+
+        <span><a href="{% url 'accounts:logout' %}">Log out</a></span>
+        {% else %}
+        <span><a href="{% url 'accounts:login' %}">Log in</a></span>
+        {% endif %}
+    </span>
+</div>
